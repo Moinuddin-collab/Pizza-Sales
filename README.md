@@ -16,7 +16,7 @@ To analyze and generate insights from pizza sales data, focusing on order trends
 
 I leveraged MySQL to explore and apply various concepts, including Joins, CTEs, Subqueries, and more.
 
-1.**Retrieve the total number of orders placed.**
+1.Retrieve the total number of orders placed.
 
 
 SELECT 
@@ -24,7 +24,7 @@ SELECT
 FROM
     orders;
     
-2.**.Calculate the total revenue generated from pizza sales.**
+2.Calculate the total revenue generated from pizza sales.
    
 SELECT 
     ROUND(SUM(orders_details.quantity * pizzas.price),
@@ -34,7 +34,7 @@ FROM
         JOIN
     pizzas ON pizzas.pizza_id = orders_details.pizza_id;
 
-     -- Identify the highest-priced pizza --   
+3.Identify the highest-priced pizza --   
      SELECT 
     pizza_types.name, pizzas.price
 FROM
@@ -44,7 +44,7 @@ FROM
 ORDER BY pizzas.price DESC
 LIMIT 1;
     
-3.Identify the most common pizza size ordered.
+4.Identify the most common pizza size ordered.
   
 SELECT 
     pizzas.size,
@@ -57,7 +57,7 @@ GROUP BY pizzas.size
 ORDER BY order_count DESC
 LIMIT 1;
 
-4.List the top 5 most ordered pizza types 
+5.List the top 5 most ordered pizza types 
 -- along with their quantities.
 
 SELECT 
@@ -73,7 +73,7 @@ ORDER BY quantity DESC
 LIMIT 5;
 
 
-5.Join the necessary tables to find the total quantity of each pizza category ordered.
+6.Join the necessary tables to find the total quantity of each pizza category ordered.
 
 SELECT 
     pizza_types.category,
@@ -87,7 +87,7 @@ FROM
 GROUP BY pizza_types.category
 ORDER BY Total_quantity DESC;
 
-6.Determine the distribution of orders by hour of the day.
+7.Determine the distribution of orders by hour of the day.
 
 SELECT 
     HOUR(order_time), COUNT(order_id) AS order_count
@@ -96,7 +96,7 @@ FROM
 GROUP BY HOUR(order_time);
 
 
-6.find the category-wise distribution of pizzas.
+8.find the category-wise distribution of pizzas.
 
 SELECT 
     category, COUNT(name)
@@ -104,7 +104,7 @@ FROM
     pizza_types
 GROUP BY category;
     
--- Group the orders by date and calculate the average number of pizzas ordered per day.
+9.Group the orders by date and calculate the average number of pizzas ordered per day.
 
 SELECT 
     ROUND(AVG(quantity), 0) AS avg_pizzas_ordered_per_day
@@ -117,7 +117,7 @@ FROM
     GROUP BY orders.order_date) AS order_quantity;
 
 
-7.Determine the top 3 most ordered pizza based on revenue.
+10.Determine the top 3 most ordered pizza based on revenue.
 SELECT 
     pizza_types.name,
     ROUND(SUM(orders_details.quantity * pizzas.price),
@@ -135,7 +135,7 @@ LIMIT 3;
 
 
 
- 8.Determine the top 3 most ordered pizza types based on revenue for each pizza category
+ 11.Determine the top 3 most ordered pizza types based on revenue for each pizza category
  WITH RevenueCTE AS (
     SELECT 
         pizza_types.category,
